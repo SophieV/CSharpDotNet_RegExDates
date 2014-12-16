@@ -46,6 +46,15 @@ namespace RegExTDD
         }
 
         [TestMethod]
+        public void SingleFullNumericDate_NoDayShortYear_Test()
+        {
+            string input = "9/96";
+            string expected = "9/1/96";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
         public void SingleFullNumericDate_FullYearOnly_Test()
         {
             string input = "2001";
@@ -68,6 +77,51 @@ namespace RegExTDD
         {
             string input = "1998 - present";
             string expected = "1/1/98";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullYearDashPresentNoSpace_Test()
+        {
+            string input = "2005-present";
+            string expected = "1/1/05";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullDateDashed_Test()
+        {
+            string input = "05-01-2009";
+            string expected = "5/1/09";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullDateDashedComma_Test()
+        {
+            string input = "05/22,2007";
+            string expected = "5/22/07";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullDateQuote_Test()
+        {
+            string input = "06'09/1988";
+            string expected = "6/9/88";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullDate5DigitYear_Test()
+        {
+            string input = "05/31/02006";
+            string expected = "5/31/06";
 
             Assert.AreEqual(expected, rewriter.ConvertDate(input));
         }

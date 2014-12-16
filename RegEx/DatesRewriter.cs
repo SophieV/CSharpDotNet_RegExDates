@@ -59,7 +59,7 @@ namespace RegEx
         {
             string converted = null;
             string pattern = @"\b(?:\d*)(?<year>\d{2}$)\b";
-            var regex = new Regex(pattern);
+            var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
             MatchCollection allMatches = regex.Matches(input);
 
             foreach (Match match in allMatches)
@@ -80,8 +80,8 @@ namespace RegEx
         private string SingleMonthAndYearNumericDate(string input)
         {
             string converted = null;
-            string pattern = @"\b(?:[0])(?<month>\d{1,2})/(?:\d*)(?<year>\d{2}$)\b";
-            var regex = new Regex(pattern);
+            string pattern = @"\b(?:[0]?)(?<month>\d{1,2})/(?:\d*)(?<year>\d{2}$)\b";
+            var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
             MatchCollection allMatches = regex.Matches(input);
 
             foreach (Match match in allMatches)
@@ -102,8 +102,8 @@ namespace RegEx
         private string SingleFullNumericDate(string input)
         {
             string converted = null;
-            string pattern = @"\b(?:[0]?)(?<month>\d{1,2})/(?:[0]?)(?<day>\d{1,2})/(?:\d*)(?<year>\d{2}$)\b";
-            var regex = new Regex(pattern);
+            string pattern = @"\b(?:[0]?)(?<month>\d{1,2})\W{1}(?:[0]?)(?<day>\d{1,2})\W{1}(?:\d*)(?<year>\d{2}$)\b";
+            var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
             MatchCollection allMatches = regex.Matches(input);
 
             foreach (Match match in allMatches)
