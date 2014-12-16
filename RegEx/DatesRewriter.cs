@@ -25,6 +25,33 @@ namespace RegEx
                 converted = SingleYearNumericDate(input);
             }
 
+            if (converted == null)
+            {
+                converted = YearNumericDashedDateRange(input);
+            }
+
+            return converted;
+        }
+
+        private string YearNumericDashedDateRange(string input)
+        {
+            string converted = null;
+            string pattern = @"\b(?:\d*)(?<year>\d{2}) \W? \w*\b";
+            var regex = new Regex(pattern, RegexOptions.IgnorePatternWhitespace);
+            MatchCollection allMatches = regex.Matches(input);
+
+            foreach (Match match in allMatches)
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.Append('1');
+                builder.Append('/');
+                // default value
+                builder.Append('1');
+                builder.Append('/');
+                builder.Append(match.Groups["year"].Value);
+                converted = builder.ToString();
+            }
+
             return converted;
         }
 
@@ -89,19 +116,6 @@ namespace RegEx
                 builder.Append(match.Groups["year"].Value);
                 converted = builder.ToString();
             }
-
-            //try
-            //{
-            //    // ignore (optional) 0s in front of a number, consider only the last two digits of the year (optionally more digits)
-            //    converted = Regex.Replace(input,
-            //          @"\b(?:[0])(?<month>\d{1,2})/(?:[0])(?<day>\d{1,2})/(?:\d*)(?<year>\d{2}$)\b",
-            //          "${month}/${day}/${year}", RegexOptions.None,
-            //          TimeSpan.FromMilliseconds(150));
-            //}
-            //catch (RegexMatchTimeoutException)
-            //{
-            //    converted = null;
-            //}
 
             return converted;
         }

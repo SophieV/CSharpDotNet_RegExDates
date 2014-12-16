@@ -62,5 +62,14 @@ namespace RegExTDD
 
             Assert.AreEqual(expected, rewriter.ConvertDate(input));
         }
+
+        [TestMethod]
+        public void SingleFullNumericDate_FullYearDashPresent_Test()
+        {
+            string input = "1998 - present";
+            string expected = "1/1/98";
+
+            Assert.AreEqual(expected, rewriter.ConvertDate(input));
+        }
     }
 }
