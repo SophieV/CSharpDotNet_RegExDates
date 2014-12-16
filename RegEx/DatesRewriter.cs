@@ -165,6 +165,8 @@ namespace RegEx
         }
 
         // identifies "09/1988-89"
+        // in order not to mess up a similar pattern that has more month details, like "09/1988-08/89"
+        // $ indicates the end of the string
         private List<string> SingleMonthAndYearsNumericDate(string input)
         {
             List<string> converted = new List<string>();
